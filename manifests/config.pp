@@ -25,12 +25,12 @@ class resolvconf::config(
 
   include resolvconf::dpkg_reconfigure
 
-  case $::operatingsystem {
+  case $facts['os']['name'] {
     'Debian': {
       $resolv_conf_target = '/etc/resolvconf/run/resolv.conf'
     }
     'Ubuntu': {
-      $resolv_conf_target = $::lsbmajdistrelease ? {
+      $resolv_conf_target = $facts['os']['distro']['release']['major'] ? {
         /^1[0-1]/ => '/etc/resolvconf/run/resolv.conf',
         default     => '../run/resolvconf/resolv.conf',
       }

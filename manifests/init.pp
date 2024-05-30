@@ -40,8 +40,8 @@ class resolvconf(
   Array[String] $options       = [],
   Boolean       $override_dhcp = false
 ) {
-  if ($::osfamily != 'Debian') {
-    fail("${::operatingsystem} not supported")
+  if ($facts['os']['family'] != 'Debian') {
+    fail("${facts['os']['name']} not supported")
   }
 
   anchor { 'resolvconf::begin': }
