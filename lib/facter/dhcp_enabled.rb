@@ -4,7 +4,7 @@ def dhcp_enabled?(interfaces_file, recurse=true)
   dhcp = false
   sourced_interfaces_files = []
 
-  if FileTest.exists?(interfaces_file)
+  if FileTest.exist?(interfaces_file)
     File.open(interfaces_file) do |file|
       dhcp = file.enum_for(:each_line).any? do |line|
         if recurse && line =~ /^\s*source\s+([^\s]+)/
